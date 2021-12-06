@@ -3,7 +3,7 @@ class Bookmarks
     @bookmarks = ["www.github.com", "www.google.com"]
   end  
 
-  def all
-    @bookmarks.join('<br>') 
+  def self.all
+    ["www.github.com", "www.google.com"].join('<br>') 
   end
 end
