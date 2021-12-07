@@ -27,6 +27,6 @@ class Bookmarks
     if url[0..6] != "http://"
       url = "http://" + url
     end
-    @conn.exec("INSERT INTO bookmarks (title, url) VALUES('#{title}', '#{url}');")
+    @conn.exec_params("INSERT INTO bookmarks (title, url) VALUES($1, $2);", [title, url])
   end
 end
