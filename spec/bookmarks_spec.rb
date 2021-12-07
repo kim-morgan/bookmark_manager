@@ -9,13 +9,13 @@ describe Bookmarks do
     it "should return a list of all bookmarks" do
       Bookmarks.add('Makers Academy', 'http://www.makersacademy.com/')
       Bookmarks.add('Google', 'http://www.google.com/')
-      expect(Bookmarks.all).to include "Makers Academy"
-      expect(Bookmarks.all).to include "Google"
+      expect(Bookmarks.all[0].title).to include "Makers Academy"
+      expect(Bookmarks.all[1].title).to include "Google"
     end
 
   context "#add"
   it "should add a bookmark" do
     Bookmarks.add("Twitter", "www.twitter.com")
-    expect(Bookmarks.all).to include "Twitter"
+    expect(Bookmarks.all[0].title).to include "Twitter"
   end
 end

@@ -1,8 +1,11 @@
 require 'pg'
 
 class Bookmarks
-  def initialize
-    @bookmarks = ["www.github.com", "www.google.com"]
+  attr_reader :id, :title, :url
+  def initialize(id,title,url)
+    @id = id
+    @title = title
+    @url = url
   end
 
   def self.check_env
@@ -14,14 +17,9 @@ class Bookmarks
   end
 
   def self.all
-    list = ""
     Bookmarks.check_env
-    @conn.exec("SELECT * FROM bookmarks") do |result|
-      result.each do
-        |row| list += "<a href='#{row.values_at('url')[0]}'> #{row.values_at('title')[0]}</a><br>"
-      end
-      return list
-    end
+    result = @conn.exec("SELECT * FROM bookmarks") 
+    test = result.map { |bookmark| Bookmarks.new(bookmark['id'],bookmark['title'],bookmark['url'])}
   end
 
   def self.add(title, url)
