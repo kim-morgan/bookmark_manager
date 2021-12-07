@@ -18,14 +18,17 @@ class Bookmarks
     Bookmarks.check_env
     @conn.exec("SELECT * FROM bookmarks") do |result|
       result.each do
-        |row| list += "#{row.values_at('url')[0]}<br>"
+        |row| list += "<a href='#{row.values_at('url')[0]}'> #{row.values_at('title')[0]}</a><br>"
       end
       return list
     end
   end
 
-  def self.add(url)
+  def self.add(title, url)
     Bookmarks.check_env
-    @conn.exec("INSERT INTO bookmarks (url) VALUES('#{url}');")
+    if url[0..6] != "http://"
+      url = "http://" + url
+    end
+    @conn.exec("INSERT INTO bookmarks (title, url) VALUES('#{title}', '#{url}');")
   end
 end
