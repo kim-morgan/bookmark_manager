@@ -7,7 +7,11 @@ class Bookmarks
 
   def self.all
     list = ""
-    conn = PG.connect(dbname: 'bookmark_manager')
+    if ENV['RACK_ENV'] == 'test'
+      conn = PG.connect(dbname: 'bookmark_manager_test')
+    else
+      conn = PG.connect(dbname: 'bookmark_manager')
+    end
     conn.exec("SELECT * FROM bookmarks") do |result|
       result.each do
         |row| list += "#{row.values_at('url')[0]}<br>"

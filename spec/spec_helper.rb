@@ -3,9 +3,14 @@ require File.join(File.dirname(__FILE__), '..', 'app.rb')
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
+require_relative 'web_helper'
 Capybara.app = BookmarkManager
 
 RSpec.configure do |config|
+
+  config.before(:each) do
+    empty_database
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
