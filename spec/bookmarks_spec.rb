@@ -2,15 +2,20 @@ require 'bookmarks'
 describe Bookmarks do
 
   before do
-    conn = PG.connect(dbname: 'bookmark_manager_test')
-    conn.exec("INSERT INTO bookmarks (url) VALUES('http://www.makersacademy.com/'), ('http://www.google.com/'), ('http://www.destroyallsoftware.com');")
+    @conn = PG.connect(dbname: 'bookmark_manager_test')
   end
 
-  context "#all" do
+  context "#all"
     it "should return a list of all bookmarks" do
+      Bookmarks.add('http://www.makersacademy.com/')
+      Bookmarks.add('http://www.google.com/')
       expect(Bookmarks.all).to include "http://www.makersacademy.com/"
       expect(Bookmarks.all).to include "http://www.google.com/"
-      expect(Bookmarks.all).to include "http://www.destroyallsoftware.com"
     end
+
+  context "#add"
+  it "should add a bookmark" do
+    Bookmarks.add("www.twitter.com")
+    expect(Bookmarks.all).to include "www.twitter.com"
   end
 end
