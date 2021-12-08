@@ -18,6 +18,12 @@ so that I can delete my bookmarks,
 I'd like to be able to remove bookmarks
 ```
 
+```
+As a user,
+so that I can update my bookmarks,
+I'd like to be able to update bookmarks
+```
+
 ![screenshot](https://github.com/makersacademy/course/raw/main/bookmark_manager/images/bookmark_manager_1.png)
 
 ## Set up databases

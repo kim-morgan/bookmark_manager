@@ -35,5 +35,8 @@ class Bookmarks
     @conn.exec_params("DELETE FROM bookmarks WHERE id=$1;", [id])
   end
 
-
+  def self.update(id, new_title, new_url)
+    Bookmarks.check_env
+    @conn.exec_params("UPDATE bookmarks SET title = $2, url = $3 WHERE id=$1;", [id, new_title, new_url])
+  end
 end

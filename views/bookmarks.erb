@@ -4,6 +4,11 @@
     <form action="/delete" method="post">
       <button name="id" type="submit" value="<%=bookmark.id%>">Delete</button>
     </form>
+
+    <form action='/bookmarks/<%= bookmark.id %>/update' method='get'>
+      <button name="id" type="submit" value="<%=bookmark.id%>">Update</button>
+    </form>
+
     </li>
   <% end %>
 </ul>

@@ -26,4 +26,11 @@ describe Bookmarks do
       Bookmarks.delete(1)
       expect(Bookmarks.all).to be_empty
     end
+  context '#update'
+    it 'should update a bookmark' do
+      @conn.exec("ALTER SEQUENCE bookmarks_id_seq RESTART WITH 1;")
+      Bookmarks.add("Twitter", "www.twitter.com")
+      Bookmarks.update(1, 'Facebook', 'www.facebook.com')
+      expect(Bookmarks.all[0].title).to include 'Facebook' 
+    end
 end
