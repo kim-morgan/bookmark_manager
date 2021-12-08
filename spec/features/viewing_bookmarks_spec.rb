@@ -1,6 +1,5 @@
 feature 'view bookmarks' do
   before do
-    conn = PG.connect(dbname: 'bookmark_manager_test')
     Bookmarks.add("Makers Academy", 'http://www.makersacademy.com/')
   end
 

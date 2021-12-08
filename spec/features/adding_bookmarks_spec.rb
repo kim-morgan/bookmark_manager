@@ -1,7 +1,4 @@
 feature "adding bookmarks" do
-  before do
-    @conn = PG.connect(dbname: 'bookmark_manager_test')
-  end
 
   scenario "adding one bookmark" do
     visit('/')

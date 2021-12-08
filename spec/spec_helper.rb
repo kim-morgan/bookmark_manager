@@ -4,6 +4,8 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
 require_relative 'web_helper'
+require './database_connection_setup.rb'
+
 Capybara.app = BookmarkManager
 
 RSpec.configure do |config|

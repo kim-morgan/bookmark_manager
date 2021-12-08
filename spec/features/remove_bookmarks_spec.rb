@@ -1,9 +1,5 @@
 feature "removing bookmarks" do
 
-  before do
-    @conn = PG.connect(dbname: 'bookmark_manager_test')
-  end
-
   scenario "deleting one bookmark" do
     visit('/')
     fill_in('name', with: 'Twitter')
