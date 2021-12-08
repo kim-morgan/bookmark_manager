@@ -16,3 +16,6 @@ group :development, :test do
 end
 
 gem "pg", "~> 1.2"
+gem 'uri', '~> 0.10.0'
+
+gem "sinatra-flash", "~> 0.3.0"
