@@ -12,6 +12,12 @@ so that I can store my bookmarks,
 I'd like to be able to add bookmarks
 ```
 
+```
+As a user,
+so that I can delete my bookmarks,
+I'd like to be able to remove bookmarks
+```
+
 ![screenshot](https://github.com/makersacademy/course/raw/main/bookmark_manager/images/bookmark_manager_1.png)
 
 ## Set up databases

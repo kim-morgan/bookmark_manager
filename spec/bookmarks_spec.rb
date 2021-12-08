@@ -18,4 +18,12 @@ describe Bookmarks do
     Bookmarks.add("Twitter", "www.twitter.com")
     expect(Bookmarks.all[0].title).to include "Twitter"
   end
+
+  context "#delete"
+    it "should delete a bookmark" do
+      @conn.exec("ALTER SEQUENCE bookmarks_id_seq RESTART WITH 1;")
+      Bookmarks.add("Twitter", "www.twitter.com")
+      Bookmarks.delete(1)
+      expect(Bookmarks.all).to be_empty
+    end
 end

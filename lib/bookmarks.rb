@@ -29,4 +29,11 @@ class Bookmarks
     end
     @conn.exec_params("INSERT INTO bookmarks (title, url) VALUES($1, $2);", [title, url])
   end
+
+  def self.delete(id)
+    Bookmarks.check_env
+    @conn.exec_params("DELETE FROM bookmarks WHERE id=$1;", [id])
+  end
+
+
 end
