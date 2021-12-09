@@ -8,6 +8,12 @@ describe Comment do
     Bookmarks.add("Twitter", "http://www.twitter.com")
   end
 
+  context "#add"
+    it "should be able to add a comment to a bookmark" do
+      Comment.add("What a nice website!", 1)
+      expect(Comment.all(1)[0].text).to eq "What a nice website!"
+    end
+
   context "#all"
     it "should be able to list all comments for a certain bookmark" do
       Comment.add("What a nice website!", 1)

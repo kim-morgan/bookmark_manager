@@ -29,4 +29,8 @@ class Bookmarks
     uri = URI.parse(url)
     uri.kind_of?(URI::HTTP) or uri.kind_of?(URI::HTTPS)
   end
+
+  def comments(comment_class = Comment)
+    comment_class.all(@id)
+  end
 end

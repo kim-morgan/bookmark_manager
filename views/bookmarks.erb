@@ -1,6 +1,6 @@
 <ul>
   <% @list.each do |bookmark| %>
-    <li> <a href="<%=bookmark.url%>"> <%= bookmark.title %></a>
+    <div> <a href="<%=bookmark.url%>"> <%= bookmark.title %></a>
     <form action="/delete" method="post">
       <button name="id" type="submit" value="<%=bookmark.id%>">Delete</button>
     </form>
@@ -9,12 +9,19 @@
       <button name="id" type="submit" value="<%=bookmark.id%>">Update</button>
     </form>
 
-    <form action='/bookmarks/<%= bookmark.id %>/comment' method='get'>
+    <form action='/bookmarks/<%= bookmark.id %>/comments/new' method='get'>
       <button name="id" type="submit" value="<%=bookmark.id%>">Comment</button>
     </form>
-
-    </li>
+    <div>
+    <% unless bookmark.comments.empty? %>
+      <h3> comments </h3>
+      <% bookmark.comments.each do |comment| %>
+        <li> <%= comment.text %> </li>
+      <% end %>
+    <% end %>
   <% end %>
+  </div>
+</div>
 </ul>
 
 <form action="/" method="get">
