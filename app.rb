@@ -2,6 +2,8 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require './lib/bookmarks'
 require './lib/comment'
+require './lib/tag'
+require './lib/bookmark_tag'
 require './database_connection_setup.rb'
 require 'sinatra/flash'
 
@@ -52,6 +54,11 @@ class BookmarkManager < Sinatra::Base
     erb :comment
   end
 
+  get '/bookmarks/:id/tags/new' do
+    @id = params[:id]
+    erb :tag
+  end
+
   post '/bookmarks/:id' do
     if Bookmarks.valid?(params[:url])
       Bookmarks.update(params[:id], params[:new_name], params[:url])
@@ -63,6 +70,11 @@ class BookmarkManager < Sinatra::Base
 
   post '/bookmarks/:id/comment' do
     Comment.add(params[:text], params[:id])
+    redirect '/bookmarks'
+  end
+
+  post '/bookmarks/:id/tag' do
+    Tag.add(params[:content], params[:id])
     redirect '/bookmarks'
   end
 

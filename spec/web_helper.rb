@@ -1,6 +1,6 @@
 def empty_database
   DatabaseConnection.setup('bookmark_manager_test')
-  DatabaseConnection.query("TRUNCATE comments, bookmarks;")
+  DatabaseConnection.query("TRUNCATE comments, bookmarks, tags, bookmarks_tags;")
 end
 
 def visit_page_add_bookmark

@@ -17,7 +17,8 @@ class Bookmarks
     DatabaseConnection.query("INSERT INTO bookmarks (title, url) VALUES($1, $2);", [title, url])
   end
 
-  def self.delete(id)
+  def self.delete(id, comment_class = Comment)
+    comment_class.delete_all(id)
     DatabaseConnection.query("DELETE FROM bookmarks WHERE id=$1;", [id])
   end
 
@@ -32,5 +33,10 @@ class Bookmarks
 
   def comments(comment_class = Comment)
     comment_class.all(@id)
+  end
+
+  def tags(bookmark_tag_class = BookmarkTag, tag_class = Tag)
+    tag_ids = bookmark_tag_class.find_by_bookmark(@id)
+    tag_ids.map { |result| tag_class.find(result["tag_id"])}
   end
 end

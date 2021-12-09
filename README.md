@@ -30,6 +30,12 @@ so that I can add notes to my bookmarks,
 I'd like to be able to add comments to bookmarks
 ```
 
+```
+As a user,
+so that I can categorize my bookmarks,
+I'd like to be able to add tags to bookmarks
+```
+
 ![screenshot](https://github.com/makersacademy/course/raw/main/bookmark_manager/images/bookmark_manager_1.png)
 
 ## Set up databases
@@ -47,6 +53,38 @@ CREATE TABLE comments (
 );
 ```
 
-* CREATE DATABASE bookmark_manager_test;
-* \c bookmark_manager;
-* CREATE TABLE bookmarks(id SERIAL PRIMARY KEY, title VARCHAR(20), url VARCHAR(60));)
+```
+CREATE TABLE tags (
+  id SERIAL PRIMARY KEY,
+  content VARCHAR(60)
+);
+```
+
+```
+CREATE TABLE bookmarks_tags (
+  id SERIAL PRIMARY KEY,
+  bookmark_id integer REFERENCES bookmarks(id),
+  tag_id integer REFERENCES tags(id)
+);
+```
+
+```
+CREATE DATABASE bookmark_manager_test;
+\c bookmark_manager_test;
+CREATE TABLE bookmarks(id SERIAL PRIMARY KEY, title VARCHAR(20), url VARCHAR(60));)
+```
+
+```
+CREATE TABLE comments (
+  id SERIAL PRIMARY KEY,
+  text VARCHAR(240),
+  bookmark_id integer REFERENCES bookmarks(id)
+);
+```
+
+```
+CREATE TABLE tags (
+  id SERIAL PRIMARY KEY,
+  content VARCHAR(60)
+);
+```

@@ -1,4 +1,6 @@
 require 'bookmarks'
+require 'tag'
+
 describe Bookmarks do
 
   context "#all"
@@ -34,4 +36,13 @@ describe Bookmarks do
     it 'should be able to tell if url is valid' do
       expect(Bookmarks.valid?('kim')).to be false
     end
+
+  context '#tags'
+  it 'should be able to show all tags' do
+    DatabaseConnection.query("ALTER SEQUENCE bookmarks_id_seq RESTART WITH 1;")
+    Bookmarks.add("Twitter", "http://www.twitter.com")
+    Tag.add("social", 1)
+    Tag.add("news", 1)
+    expect(Bookmarks.new("1", "Twitter", "http://www.twitter.com").tags).to match_array ["social", "news"]
+  end
 end 

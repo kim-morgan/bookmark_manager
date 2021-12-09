@@ -17,4 +17,8 @@ class Comment
     result.map { |comment| Comment.new(comment['id'], comment['text'], comment['bookmark_id'])}
   end
 
+  def self.delete_all(bookmark_id)
+    DatabaseConnection.query("DELETE FROM comments WHERE bookmark_id=$1;", [bookmark_id])
+  end
+
 end

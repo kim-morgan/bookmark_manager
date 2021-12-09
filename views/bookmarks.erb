@@ -12,11 +12,21 @@
     <form action='/bookmarks/<%= bookmark.id %>/comments/new' method='get'>
       <button name="id" type="submit" value="<%=bookmark.id%>">Comment</button>
     </form>
+
+    <form action='/bookmarks/<%= bookmark.id %>/tags/new' method='get'>
+      <button name="id" type="submit" value="<%=bookmark.id%>">Add tag</button>
+    </form>
     <div>
     <% unless bookmark.comments.empty? %>
       <h3> comments </h3>
       <% bookmark.comments.each do |comment| %>
         <li> <%= comment.text %> </li>
+      <% end %>
+    <% end %>
+    <% unless bookmark.tags.empty? %>
+      <h3> tags </h3>
+      <% bookmark.tags.each do |tag| %>
+        <li> <%= tag %> </li>
       <% end %>
     <% end %>
   <% end %>
