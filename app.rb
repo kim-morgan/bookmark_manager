@@ -2,19 +2,32 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require './lib/bookmarks'
 require './database_connection_setup.rb'
+require 'sinatra/flash'
 
 class BookmarkManager < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
 
+  enable :sessions
+  register Sinatra::Flash
+
   get '/' do
     erb :index
   end
 
   post '/add' do
-    Bookmarks.add(params[:name], params[:url])
-    redirect '/bookmarks'
+    if Bookmarks.valid?(params[:url]) == false
+      redirect '/invalid'
+    else
+      Bookmarks.add(params[:name], params[:url])
+      redirect '/bookmarks'
+    end
+  end
+
+  get '/invalid' do
+    flash[:notice] = 'Please enter valid url'
+    redirect '/'
   end
 
   get '/bookmarks' do

@@ -14,9 +14,6 @@ class Bookmarks
   end
 
   def self.add(title, url)
-    if url[0..6] != "http://"
-      url = "http://" + url
-    end
     DatabaseConnection.query("INSERT INTO bookmarks (title, url) VALUES($1, $2);", [title, url])
   end
 
@@ -26,5 +23,10 @@ class Bookmarks
 
   def self.update(id, new_title, new_url)
     DatabaseConnection.query("UPDATE bookmarks SET title = $2, url = $3 WHERE id=$1;", [id, new_title, new_url])
+  end
+
+  def self.valid?(url)
+    uri = URI.parse(url)
+    uri.kind_of?(URI::HTTP) or uri.kind_of?(URI::HTTPS)
   end
 end
