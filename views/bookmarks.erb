@@ -9,6 +9,10 @@
       <button name="id" type="submit" value="<%=bookmark.id%>">Update</button>
     </form>
 
+    <form action='/bookmarks/<%= bookmark.id %>/comment' method='get'>
+      <button name="id" type="submit" value="<%=bookmark.id%>">Comment</button>
+    </form>
+
     </li>
   <% end %>
 </ul>

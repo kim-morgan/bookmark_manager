@@ -1,9 +1,6 @@
 feature 'Update bookmarks' do
   scenario 'update one bookmark' do
-    visit('/')
-    fill_in('name', with: 'Twitter')
-    fill_in('url', with: "http://www.twitter.com")
-    click_button('Submit')
+    visit_page_add_bookmark
     click_button('Update')
     fill_in('new_name', with: 'Facebook')
     fill_in('url', with: 'http://www.facebook.com')

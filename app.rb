@@ -45,8 +45,17 @@ class BookmarkManager < Sinatra::Base
     erb :update
   end
 
+  get '/bookmarks/:id/comment' do
+    @id = params[:id]
+    erb :comment
+  end
+
   post '/bookmarks/:id' do
-    Bookmarks.update(params[:id], params[:new_name], params[:url])
+    if Bookmarks.valid?(params[:url])
+      Bookmarks.update(params[:id], params[:new_name], params[:url])
+    else
+      flash[:notice] = 'Please enter valid url'
+    end
     redirect '/bookmarks'
   end
 
