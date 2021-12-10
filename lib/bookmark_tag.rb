@@ -16,4 +16,13 @@ class BookmarkTag
   def self.find_by_bookmark(bookmark_id)
     DatabaseConnection.query("SELECT * FROM bookmarks_tags WHERE bookmark_id=$1;", [bookmark_id])
   end
+
+  def self.find_by_tag(tag_id)
+    DatabaseConnection.query("SELECT * FROM bookmarks_tags WHERE tag_id=$1;", [tag_id])
+  end
+
+  def self.delete_by_bookmark(bookmark_id)
+    DatabaseConnection.query("DELETE FROM bookmarks_tags WHERE bookmark_id=$1;", [bookmark_id])
+  end
+  
 end

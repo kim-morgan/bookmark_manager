@@ -59,6 +59,11 @@ class BookmarkManager < Sinatra::Base
     erb :tag
   end
 
+  get '/tags/:id' do
+    @list = Tag.new(params[:id], params[:name]).bookmarks
+    erb :tags
+  end
+
   post '/bookmarks/:id' do
     if Bookmarks.valid?(params[:url])
       Bookmarks.update(params[:id], params[:new_name], params[:url])

@@ -17,4 +17,9 @@ describe BookmarkTag do
     expect(result.tag_id).to eq "1"
   end
 
+  it "should be able to find bookmarks by tag" do
+    BookmarkTag.add(1,1)
+    expect(BookmarkTag.find_by_tag(1)[0]["bookmark_id"]).to eq "1"
+  end
+
 end

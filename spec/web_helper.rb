@@ -9,3 +9,17 @@ def visit_page_add_bookmark
   fill_in('url', with: 'http://www.twitter.com')
   click_button('Submit')
 end
+
+def visit_page_add_bookmark_1
+  visit('/')
+  fill_in('name', with: 'Facebook')
+  fill_in('url', with: 'http://www.facebook.com')
+  click_button('Submit')
+end
+
+def visit_page_add_bookmark_2
+  visit('/')
+  fill_in('name', with: 'BBC')
+  fill_in('url', with: 'http://www.bbc.com')
+  click_button('Submit')
+end

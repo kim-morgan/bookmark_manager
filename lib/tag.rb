@@ -11,7 +11,7 @@ class Tag
 
   def self.add(content, bookmark_id, bookmark_tag_class = BookmarkTag)
     if Tag.exists?(content)
-      result = DatabaseConnection.query("SELECT * FROM tags WHERE content=$1;", [tag])
+      result = DatabaseConnection.query("SELECT * FROM tags WHERE content=$1;", [content])
       BookmarkTag.add(bookmark_id, result[0]['id'])
       Tag.new(result[0]['id'], result[0]['content'])
     else
@@ -28,7 +28,12 @@ class Tag
 
   def self.find(id)
     result = DatabaseConnection.query("SELECT * FROM tags WHERE id=$1;", [id])
-    result[0]['content']
+    Tag.new(result[0]["id"],result[0]['content'])
+  end
+
+  def bookmarks(bookmark_class= Bookmarks, bookmark_tag_class = BookmarkTag)
+    bookmark_ids = bookmark_tag_class.find_by_tag(@id)
+    result = bookmark_ids.map { |relation| bookmark_class.find(relation["bookmark_id"]) }
   end
   
 end

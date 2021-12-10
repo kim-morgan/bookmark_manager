@@ -40,9 +40,19 @@ describe Bookmarks do
   context '#tags'
   it 'should be able to show all tags' do
     DatabaseConnection.query("ALTER SEQUENCE bookmarks_id_seq RESTART WITH 1;")
+    DatabaseConnection.query("ALTER SEQUENCE tags_id_seq RESTART WITH 1;")
     Bookmarks.add("Twitter", "http://www.twitter.com")
     Tag.add("social", 1)
     Tag.add("news", 1)
-    expect(Bookmarks.new("1", "Twitter", "http://www.twitter.com").tags).to match_array ["social", "news"]
+    expect(Bookmarks.new("1", "Twitter", "http://www.twitter.com").tags[0].content).to eq "social"
+    expect(Bookmarks.new("1", "Twitter", "http://www.twitter.com").tags[1].content).to eq "news"
+  end
+
+  context '#find'
+  it 'should be able to find bookmarks by id' do
+    DatabaseConnection.query("ALTER SEQUENCE bookmarks_id_seq RESTART WITH 1;")
+    Bookmarks.add("Twitter", "http://www.twitter.com")
+    expect(Bookmarks.find(1).title).to eq "Twitter"
+    expect(Bookmarks.find(1).url).to eq "http://www.twitter.com"
   end
 end 

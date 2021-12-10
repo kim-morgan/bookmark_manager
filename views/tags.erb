@@ -26,7 +26,7 @@
     <% unless bookmark.tags.empty? %>
       <h3> tags </h3>
       <% bookmark.tags.each do |tag| %>
-        <li> <a href="/tags/<%= tag.id %>"> <%= tag.content %> </a> </li>
+        <li> <a href="/tags/<%= tag.id %>" name=<%= tag.content %>> <%= tag.content %> </a> </li>
       <% end %>
     <% end %>
   <% end %>
@@ -36,4 +36,7 @@
 
 <form action="/" method="get">
   <input type="submit" value="Back to home">
+</form>
+<form action="/bookmarks" method="get">
+  <input type="submit" value="Back to all bookmarks">
 </form>
